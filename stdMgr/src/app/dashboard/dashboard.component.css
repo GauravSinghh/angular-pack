@@ -1,0 +1,83 @@
+button{
+    margin-right: 5px;
+}
+#searchItem{
+  margin-left: 10px;
+  margin-right: 6px;
+  width: 150px;
+}
+#sortBy,.sortType{
+  padding: 5px;
+  width: 150px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+  margin-left: 10px;
+}
+.totalCount{
+  padding: 5px;
+  text-align: center;
+  width: 30px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+}
+
+.container{
+    display: flex;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px;
+  }
+  
+  td, th {
+    border: 1px solid #888686;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #e2e5e7;
+  }
+
+  /* #logoutBtn{
+    margin-left: 60%;
+  } */
+
+/* icons */
+.slideIcons{
+  color: rgb(10, 115, 163);
+  border: solid rgb(122, 120, 120) 1px;
+  padding: 5px;
+  border-radius: 3px;
+}
+.borderCurve{
+  border-radius: 3px;
+  border: solid rgb(122, 120, 120) 1px;
+}
+
+.paginationWords{
+  margin-left: 5px;
+}
+.maxItemInput{
+  padding: 5px;
+  text-align: center;
+  width: 50px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+#noData{
+font-size: larger;
+}
+.searchSectionAlignment{
+  display: flex;
+  justify-content: space-between;
+}
+
+.paginationOptions{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10%;
+}

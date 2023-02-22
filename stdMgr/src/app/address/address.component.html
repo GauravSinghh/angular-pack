@@ -1,0 +1,14 @@
+<h4>Address Details</h4>
+<form 
+class="col-xs-12"
+#addressForm="ngForm" (ngSubmit)="onSaveAddress(addressForm.value)"
+> 
+
+  <div class="list-group">
+    <input type="text" class="list-group-item" placeholder="Enter City Name" name="cityName" ngModel>   
+    <input type="text" class="list-group-item" placeholder="Enter Address Id" name="addressId" ngModel> 
+    <input type="text" class="list-group-item" placeholder="Enter State Name" name="stateName" ngModel>  
+    <input type="text" class="list-group-item" placeholder="Enter pincode" name="pincode" ngModel>  
+  </div>
+  <button type="submit" class="btn btn-success" >{{editMode ? 'Update Address':'Add Address'}} </button>
+</form>

@@ -1,0 +1,175 @@
+<nav class="navbar bg-primary" data-bs-theme="dark">
+    <!-- Navbar content -->
+    <div class="navbar-brand"  (click)="onGettingResultByPagiantion()" style="cursor: pointer;"> Student List
+    </div>
+    <div class="navbar-brand"(click)="onGettingCourseList()" style="cursor: pointer;"> Course List</div>
+    <div class="navbar-brand"(click)="onLoggingOut()" style="cursor: pointer;" id="logoutBtn"> Log Out</div>
+  </nav>
+
+
+
+
+  <!-- Searching and sorting -->
+<div   *ngIf="viewStudentList">
+    <h4>Student List</h4> 
+    <form class="form-inline searchSectionAlignment">
+      <div class="form-group mb-2">  
+        <select name="sortField" id="sortBy" class="form-control-plaintext" (change)="onSortBy($event)">
+          <option value="">-Sort By-</option>
+          <option value="studentId">Sort By StudentID</option>
+          <option value="studentName" >Sort By Student Name</option>
+          <option value="contactNo" >Sort By Contact</option>
+        </select>
+        <select name="sortType"  class="form-control-plaintext sortType" (change)="onSortType($event)">
+          <option value="">-Sort Type-</option>
+          <option value="asc">Ascending </option>
+          <option value="desc" >Descending</option>
+        </select> 
+    </div> 
+    <div>
+      <div class="form-group mx-sm-3 mb-2 ">
+        <input 
+          type="searchItem" 
+          class="form-control" 
+          id="searchItem" 
+          placeholder="Enter Name"
+          name="searchItem"
+          #searchInput>
+      </div>
+      <button 
+      type="submit" 
+      class="btn btn-primary mb-2"
+      (click)="onSearchItem(searchInput.value)">Search</button>
+    
+    </div>
+     </form>
+     
+  
+       <!-- Student List Table -->
+    <table >
+      <tr >
+        
+        <th>ID</th>
+        <th> Name</th>
+        <th>Contact</th>
+        <th>Aadhar</th>
+        <th>Addresses</th>
+        <th>Course</th>
+        <th>Action</th>
+      </tr>
+      
+        <div  *ngIf="studentData==null" id="noData"> No Student Data</div>
+        <tr *ngFor="let std of studentData,let i=index"
+          >
+          
+          <td>{{std.studentId}}</td>
+          <td>{{std.studentName}}</td>
+          <td>{{std.contactNo}} </td>
+          <td>{{std.aadhar?.aadharNo}}</td>
+          <td *ngIf="std.address" >
+            <p 
+             *ngFor="let ad of std.address, 
+             let y=index" > 
+             {{y+1}}: {{ad?.cityName}}, {{ad?.stateName}}, {{ad?.pincode}}
+            </p>       
+          </td> 
+          <td *ngIf="std.course">
+             <p 
+              *ngFor="let crs of std.course,
+              let y=index">{{y+1}}: ID:{{crs?.courseId}},{{crs?.courseName}},{{crs?.courseDetails}}</p>
+           
+          </td>
+          <td>
+            <button class="btn btn-primary"  (click)="onUpdating(i)">Edit</button> 
+            <button class="btn btn-danger" (click)="onDeleting(std.studentId)">Del</button>  
+            <button class="btn btn-success" (click)="onAddingAddress(std.studentId)">+ Address</button>
+            <button class="btn btn-success" (click)="onAddingCourse(std.studentId)">+ Course</button> 
+          </td>
+        
+        </tr>
+    
+    </table>
+    
+  </div>
+  
+ 
+
+  
+<!--Pagination Options -->
+<div class="paginationOptions" *ngIf="viewStudentList">
+    <div>
+      <span class="paginationWords"> Total items: </span>
+      <input type="text" readonly class="form-control-plaintext totalCount borderCurve"  value={{totalItems}}>
+      <span class="paginationWords">Max items on this Page: </span>
+      <!-- <input type="text" readonly class="form-control-plaintext totalCount borderCurve"  value={{noOfItemsOnthisPage}}> -->
+      <select name="limit" id="" class="borderCurve maxItemInput" (change)="onLimitChange($event)">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+      <span class="paginationWords">Current Page: </span>
+      <i class="fa-solid fa-angles-left slideIcons" (click)="onDecreasingPageNo()"></i>
+      <input type="text" readonly class="form-control-plaintext totalCount borderCurve"  value={{currentPage}}>
+      <i class="fa-solid fa-angles-right slideIcons" (click)="onIncreasingPageNo()"></i>
+      <span class="paginationWords">Last Page: </span>
+      <input type="text" readonly class="form-control-plaintext totalCount borderCurve"  value={{lastPage}}>
+       
+    </div>
+    </div>
+     <!-- Course list Table -->
+
+  <div   *ngIf="courseDataToggle">
+    <h4>Course List</h4>
+    <table >
+      <tr >
+        <th>#ID</th>
+        <th>Course Name</th>
+        <th>Course Details</th>
+        <th>Action</th>
+      </tr>     
+      <tr *ngFor="let crs of courseListData,
+         let i=index"
+          >
+          <td>{{crs.courseId}}</td>
+          <td>{{crs.courseName}}</td>
+          <td>{{crs.courseDetails}} </td>
+          <td *ngFor="let stdID of crs.student">
+            {{stdID.studentId}}
+          </td>
+          <td> <button class="btn btn-danger" (click)="onDeletingCourse(crs.courseId)">Delete</button>  </td>
+     </tr>
+    </table> 
+  </div>
+    
+
+    <!-- to Save Student -->
+<div class="container">
+    <div>
+      <h4>Student Details</h4>
+      <form 
+      class="col-xs-12"
+      #studentForm="ngForm" (ngSubmit)="onSaveStudent(studentForm)"
+      > 
+  
+        <div class="list-group">
+          <input type="text" class="list-group-item" placeholder="Enter Student Name" name="studentName" ngModel>   
+          <input type="text" class="list-group-item" placeholder="Enter Student Id" name="studentId" ngModel> 
+          <input type="text" class="list-group-item" placeholder="Enter Student Contact" name="contactNo" ngModel>
+          <input type="text" class="list-group-item" placeholder="Enter Aadhar No" name="aadharNo" ngModel>
+        </div>
+        <button type="submit" class="btn btn-success" >{{editMode ? 'Update Student':'Add Student'}} </button>
+      </form>
+    </div>
+   <div *ngIf="addressToggle"> 
+    <app-address></app-address>
+   </div>
+    <div class="col-xs-12"
+    *ngIf="aadharToggle">
+     <app-aadhar></app-aadhar>
+    </div>
+    <div class="col-xs-12"
+    *ngIf="courseToggle">
+     <app-course></app-course>
+    </div>
+    </div>
+  

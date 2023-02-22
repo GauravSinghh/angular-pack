@@ -1,0 +1,16 @@
+<h4>Course Details</h4>
+<form 
+class="col-xs-12"
+#courseForm="ngForm" (ngSubmit)="onSaveCourse(courseForm.value)"
+> 
+
+  <div class="list-group">
+    <input type="text" class="list-group-item" placeholder="Enter Course Name" name="courseName" ngModel>   
+    <input type="text" class="list-group-item" placeholder="Enter Course Id" name="courseId" ngModel> 
+    <input type="text" class="list-group-item" placeholder="Enter Course Details" name="courseDetails" ngModel>  
+  </div>
+  <!-- <button type="submit" class="btn btn-success" >{{editModeCourse ? 'Update Course':'Add Course'}} hello</button> -->
+
+  <button type="submit" class="btn btn-success" >Add Course</button>
+
+</form>
