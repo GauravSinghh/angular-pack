@@ -1,0 +1,29 @@
+<label>Server trial!</label>
+<hr>
+<input type="text"
+class="form-control"
+[(ngModel)]="serverName"
+>
+<!-- <button class="btn btn-primary"
+[disabled]="!changedStatus"
+(click)="onUpdatingServerName()"
+>Add Name</button> -->
+<button class="btn btn-primary"
+[disabled]="!changedStatus"
+(click)="onUpdatingServerName()"
+>Add Name</button>
+<p>{{serverStatus}}</p>
+<p>Changing name {{changedStatus}}</p>
+
+<label >Username</label>
+<input type="text"
+class="control-form"
+[(ngModel)]="username">
+
+<p>{{username}}</p>
+
+<!-- <button class="btn btn-primary" [disabled]="username===''"
+(click)="onClearName()">Reset Username</button> -->
+
+<button class="btn btn-primary" [disabled]="username===''"
+(click)="username=''">Reset Username</button>

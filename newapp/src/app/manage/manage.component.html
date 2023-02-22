@@ -1,0 +1,27 @@
+<h2>Management System</h2>
+
+<input type="text"
+class="form-control"
+[(ngModel)]="name"
+>
+
+<button class="btn btn-primary"
+(click)="onAddingName()"
+>Enter</button>
+<!-- <p>{{name}}</p> -->
+
+<!-- <p *ngIf="finalName else noName"  
+[ngStyle]="{backgroundColor:getColor()}"
+[ngClass]="{exp:age>30}"
+>
+Welcome, {{finalName}} {{age}} years old!
+</p> -->
+<p *ngIf="finalName else noName"  
+>
+Welcome, {{finalName}} Added
+</p>
+<!-- <p *ngIf="!finalName">Enter Your Name!</p> -->
+<ng-template #noName>
+    Enter Your Name!
+</ng-template>
+<app-managers *ngFor="let mana of managers"> {{mana}}</app-managers>
